@@ -18,6 +18,7 @@ import java.util.Properties;
 public class MyConsumer {
     
     public static void main(String[] args){
+
         //创建配置信息
         Properties properties = new Properties();
         //给配置信息赋值
@@ -29,8 +30,16 @@ public class MyConsumer {
         //key,value的反序列化
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserializer");
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
         //消费者组
+        //修改组名后可以重新消费之前的消息
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "bigdata");
+
+        //重置消费者的offset
+        //要想该参数生效：1.刚初始化 2.消息被删除掉（7天或自己设置的失效时间）
+        //如何重新消费某个主题的消息？ 换组 + 重置offset并将参数设置earliest
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
