@@ -21,3 +21,14 @@ kafka-console-producer.sh --broker-list 192.168.30.129:9092 --topic first
 kafka-console-consumer.sh --bootstrap-server 192.168.30.129:9092 --topic first
 ```
 
+
+
+kafka监控
+
+配置环境变量：
+
+```
+export KE_HOME=/usr/local/kafka/eagle/kafka-eagle-web-2.0.6
+export PATH=$PATH:$KE_HOME/bin
+```
+
